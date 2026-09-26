@@ -1,5 +1,40 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-/* Your custom styles will go here */
+/* Custom CSS variables for consistent theming */
+:root {
+  --color-bg: #0f0f13;
+  --color-surface: #1a1a24;
+  --color-surface-raised: #22223a;
+  --color-border: #2e2e45;
+  --color-accent: #6c63ff;
+  --color-accent-hover: #5a52e0;
+  --color-danger: #ef4444;
+  --color-success: #22c55e;
+  --color-text: #f0f0f5;
+  --color-text-muted: #8888aa;
+}
+
+/* Base styles */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-muted);
+}
