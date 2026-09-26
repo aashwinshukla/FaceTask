@@ -1,0 +1,34 @@
+# Phase documentation files
+phase1.md
+phase2.md
+phase3.md
+phase4.md
+phase5.md
+phase6.md
+current.md
+
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
