@@ -53,7 +53,26 @@ export function BoardProvider({childern}){
         setTasks(prev => [...prev, tasks]);
     }
 
-    return( <>
+    function moveTask(id, newStatus){
+        EditTask(id, {status: newStatus});
+    }
 
-            </>);
+    function getTasksByStatus(status) {
+        return tasks.filter(t => t.status === status)
+    }
+
+    return (
+        <BoardContext.Provider
+            value={{ tasks, COLUMNS, addTask, editTask, deleteTask, restoreTask, moveTask, getTasksByStatus }}
+            >
+            {children}
+        </BoardContext.Provider>
+    );
+}
+
+
+export function useBoard() {
+  const ctx = useContext(BoardContext)
+  if (!ctx) throw new Error('useBoard must be used inside BoardProvider')
+  return ctx
 }
