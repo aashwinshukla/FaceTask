@@ -1,40 +1,53 @@
 @import "tailwindcss";
 
-/* Custom CSS variables for consistent theming */
+/* Light mode colour palette */
 :root {
-  --color-bg: #0f0f13;
-  --color-surface: #1a1a24;
-  --color-surface-raised: #22223a;
-  --color-border: #2e2e45;
-  --color-accent: #6c63ff;
-  --color-accent-hover: #5a52e0;
-  --color-danger: #ef4444;
-  --color-success: #22c55e;
-  --color-text: #f0f0f5;
-  --color-text-muted: #8888aa;
+  --color-bg:             #f4f5f7;
+  --color-surface:        #ffffff;
+  --color-surface-raised: #f0f1f4;
+  --color-border:         #e0e2e9;
+  --color-border-strong:  #c8cad4;
+
+  --color-accent:         #6c63ff;
+  --color-accent-hover:   #5a52e0;
+  --color-accent-light:   #ede9ff;
+
+  --color-danger:         #ef4444;
+  --color-danger-light:   #fee2e2;
+  --color-success:        #22c55e;
+  --color-success-light:  #dcfce7;
+  --color-warning:        #f59e0b;
+
+  --color-text:           #1a1d2e;
+  --color-text-secondary: #4b5068;
+  --color-text-muted:     #8b90a7;
+
+  --shadow-sm:  0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:  0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+  --shadow-lg:  0 8px 24px rgba(0,0,0,0.10), 0 4px 8px rgba(0,0,0,0.06);
 }
 
-/* Base styles */
+/* Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 body {
   background-color: var(--color-bg);
   color: var(--color-text);
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--color-surface);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--color-border);
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-text-muted);
-}
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--color-surface-raised); }
+::-webkit-scrollbar-thumb { background: var(--color-border-strong); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-text-muted); }
