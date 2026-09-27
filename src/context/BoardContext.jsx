@@ -41,11 +41,8 @@ export function BoardProvider({ children }) {
   }
 
   function deleteTask(id) {
-    let deleted = null
-    setTasks(prev => {
-      deleted = prev.find(t => t.id === id)
-      return prev.filter(t => t.id !== id)
-    })
+    const deleted = tasks.find(t => t.id === id) ?? null
+    setTasks(prev => prev.filter(t => t.id !== id))
     return deleted
   }
 
