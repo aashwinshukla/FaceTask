@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import toast from 'react-hot-toast'
+import { useDroppable } from '@dnd-kit/core'
 import { useBoard } from '../../context/BoardContext'
 import TaskCard from './TaskCard'
 import TaskModal from './TaskModal'
@@ -13,7 +14,7 @@ const COLUMN_META = {
 function Column({ status, filteredTasks }) {
   const { addTask } = useBoard()
   const [adding, setAdding] = useState(false)
-
+  const { setNodeRef, isOver } = useDroppable({ id: status })
   const { label, color } = COLUMN_META[status]
   const tasks = filteredTasks.filter(t => t.status === status)
 
@@ -26,11 +27,12 @@ function Column({ status, filteredTasks }) {
   return (
     <>
       <div
-        className="flex flex-col rounded-2xl flex-1 min-w-0"
+        ref={setNodeRef}
+        className="flex flex-col gap-3 p-4 flex-1"
         style={{
-          backgroundColor: 'var(--color-surface-raised)',
-          border: '1px solid var(--color-border)',
-          minHeight: '480px',
+          backgroundColor: isOver ? 'var(--color-accent-light)' : 'transparent',
+          borderRadius: '0.75rem',
+          transition: 'background-color 0.15s',
         }}
       >
         {/* Column header */}
