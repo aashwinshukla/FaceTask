@@ -18,7 +18,7 @@ function Column({ status, filteredTasks }) {
   const tasks = filteredTasks.filter(t => t.status === status)
 
   function handleAdd(data) {
-    addTask({ ...data, status })
+    addTask(data)
     setAdding(false)
     toast.success('Task added')
   }
