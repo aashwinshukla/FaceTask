@@ -2,7 +2,7 @@
 
 A drag-and-drop Kanban task board built with React — plan, organize, and track tasks across To Do, In Progress, and Done columns.
 
-🔗 **Live Demo:** _add your deployed link here_
+🔗 **Live Demo:** (https://face-task.vercel.app/)
 📂 **Repo:** https://github.com/aashwinshukla/FaceTask
 
 ---
