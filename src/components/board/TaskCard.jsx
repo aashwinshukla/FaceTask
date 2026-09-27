@@ -2,6 +2,8 @@ import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { useBoard } from '../../context/BoardContext'
 import TaskModal from './TaskModal'
+import { useDraggable } from '@dnd-kit/core'
+import { CSS } from '@dnd-kit/utilities'
 
 const PRIORITY_COLORS = {
   low:    { bg: '#dcfce7', text: '#15803d' },
@@ -20,6 +22,14 @@ function TaskCard({ task }) {
 
   const pc = PRIORITY_COLORS[task.priority]
   const overdue = isOverdue(task.dueDate, task.status)
+
+  const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({ id: task.id })
+
+  const dragStyle = {
+    transform: CSS.Translate.toString(transform),
+    opacity: isDragging ? 0.4 : 1,
+    cursor: isDragging ? 'grabbing' : 'grab',
+  }
 
   function handleEdit(data) {
     editTask(task.id, data)
@@ -51,8 +61,12 @@ function TaskCard({ task }) {
   return (
     <>
       <div
+        ref={setNodeRef}
+        {...listeners}
+        {...attributes}
         className="rounded-xl p-4 flex flex-col gap-2 group cursor-pointer transition-shadow hover:shadow-md"
         style={{
+          ...dragStyle,
           backgroundColor: 'var(--color-surface)',
           border: `1px solid ${overdue ? 'var(--color-danger)' : 'var(--color-border)'}`,
           boxShadow: 'var(--shadow-sm)',
@@ -94,7 +108,10 @@ function TaskCard({ task }) {
         {/* Action buttons — visible on hover */}
         <div className="flex gap-2 mt-1 opacity-0 group-hover:opacity-100 transition-opacity">
           <button
-            onClick={() => setEditing(true)}
+            onClick={(e) => {
+              e.stopPropagation()
+              setEditing(true)
+            }}
             className="text-xs px-3 py-1 rounded-lg hover:opacity-80 transition-opacity"
             style={{
               backgroundColor: 'var(--color-surface-raised)',
@@ -105,7 +122,10 @@ function TaskCard({ task }) {
             Edit
           </button>
           <button
-            onClick={handleDelete}
+            onClick={(e) => {
+              e.stopPropagation()
+              handleDelete()
+            }}
             className="text-xs px-3 py-1 rounded-lg hover:opacity-80 transition-opacity"
             style={{
               backgroundColor: 'var(--color-danger-light)',
